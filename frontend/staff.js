@@ -17,9 +17,13 @@
 //This is the angular version implmentation
 var app = angular.module('staffTable', []);
 
-app.controller('staffCtrl', function($scope, $http){
-  $http.get("http://localhost:4567/staff")
-  .then(function(response) {
-    $scope.data = response.data;
-  });
+app.controller('staffCtrl', function($scope, $http, $interval){
+  $scope.reload = function () {
+    $http.get("http://localhost:4567/staff")
+    .then(function(response) {
+      $scope.data = response.data;
+    });
+  };
+  $scope.reload();
+  $interval($scope.reload, 5000);
 });
