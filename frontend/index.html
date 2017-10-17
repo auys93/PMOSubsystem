@@ -99,18 +99,25 @@
 
           <h2 class="sub-header">Staff Data</h2>
           <div class="table-responsive">
-            <table id="staff_table"class="table table-striped" >
+            <!-- <table id="staff_table"class="table table-striped" > -->
+            <table ng-app="staffTest" ng-controller="staffCtrl" class="table table-striped" >
               <thead>
                 <tr>
-                  <th data-field="staffID">#</th>
-                  <th data-field="firstName">First Name</th>
-                  <th data-field="lastName">Last Name</th>
-                  <th data-field="username">Username</th>
-                  <th data-field="password">Password</th>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                  <th>Password</th>
                 </tr>
               </thead>
               <tbody >
-
+                <tr ng-repeat="x in data">
+                  <td>{{x.staffID}}</td>
+                  <td>{{x.firstName}}</td>
+                  <td>{{x.lastName}}</td>
+                  <td>{{x.username}}</td>
+                  <td>{{x.password}}</td>
+                </tr>
               </tbody>
             </table>
           </div>
