@@ -27,3 +27,6 @@ app.controller('staffCtrl', function($scope, $http, $interval){
   $scope.reload();
   $interval($scope.reload, 5000);
 });
+angular.element(document).ready(function() {
+angular.bootstrap(document.getElementById("App1"), ['staffTable']);
+});
