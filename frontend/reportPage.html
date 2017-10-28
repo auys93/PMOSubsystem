@@ -10,12 +10,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="report.js"></script>
     <script src="strategy.js"></script>
+    <script src="updateStrategy.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -33,6 +34,15 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <title>PMOSubsystem</title>
+    <style>
+    .red {
+      color: red;
+  }
+
+  .black {
+      color: black;
+  }
+    </style>
   </head>
 
   <body>
@@ -69,8 +79,8 @@
             <li><a href="updatePage.html">Updates</a></li>
             <li><a href="#">Past Reports</a></li>
           </ul>
-
         </div>
+
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h2 class="sub-header">Crisis Report</h2>
           <div class="table-responsive">
@@ -117,6 +127,7 @@
                 </tbody>
             </table>
           </div>
+
           <h2 class="sub-header">Strategy</h2>
           <div class="table-responsive">
             <table id="App2" ng-app="strategyTable" ng-controller="strategyCtrl" class="table table-striped" >
@@ -132,7 +143,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="x in data">
+                <tr ng-repeat="x in data" ng-class="{red: x.changeColor, white: !x.changeColor}">
                   <td>{{x.strategyID}}</td>
                   <td>{{x.description1}}</td>
                   <td>{{x.description2}}</td>
@@ -140,12 +151,43 @@
                   <td>{{x.strategyStatus}}</td>
                   <td>{{x.reportID}}</td>
                   <td>{{x.username}}</td>
+                  <td> <button type="button" id="button1" value="" class="btn btn-default" data-toggle="modal"
+                    data-target="#myModal" data-stratno="{{x.strategyID}}" data-descrip1="{{x.description1}}"
+                    data-descrip2="{{x.description2}}" data-descrip3="{{x.description3}}"
+                    data-repid="{{x.reportID}}" data-user="{{x.username}}" >Authorize</button></td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <div id="App3" ng-app="postStrategy" ng-controller="postCtrl">
+            <form name="strategy-form">
+            <div class="container">
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Authorize</h4>
+                    </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                        <center>How do you wish to proceed?</center>
+                        <button type="submit"  class="btn btn-success" style="width: 90px; margin: 15px 5px 15px 190px;"
+                        ng-click="postApprove(strategyID, description1, description2, description3, strategyApprove, reportID, username)"
+                        data-dismiss="modal">Approve</button>
+                        <button type="submit" class="btn btn-danger" style="width: 90px; margin: auto 10;"
+                        ng-click="postReject(strategyID, description1, description2, description3, strategyReject, reportID, username)"
+                        data-dismiss="modal">Reject</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          </div>
         </div>
-      </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
