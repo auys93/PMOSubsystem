@@ -4,6 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Prime Minister Office</title>
+
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="checkLogin.js"></script>
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -13,7 +20,7 @@
     </head>
     <body>
         <!-- Top content -->
-        <div class="top-content">
+        <div class="top-content" id="App1" ng-app="loginStaff" ng-controller="loginCtrl">
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
@@ -35,16 +42,14 @@
                             </div>
                             </div>
                             <div class="form-bottom">
-                          <form role="form" action="" method="post" class="login-form">
+                          <form name="login-form">
                             <div class="form-group">
-                              <label class="sr-only" for="form-username">Username</label>
-                                <input type="text" name="form-username" placeholder="GovernmentID..." class="form-username form-control" id="form-username">
+                                <input type="text"  placeholder="GovernmentID..." class="form-control" ng-model="username">
                               </div>
                               <div class="form-group">
-                                <label class="sr-only" for="form-password">Password</label>
-                                <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                <input type="password"  placeholder="Password..." class="form-control" ng-model="password">
                               </div>
-                              <button type="submit" class="btn" onclick="viewpage.html">Login</button>
+                              <button type="submit" class="btn" ng-click="checkStaffData(username, password)" >Login</button>
                           </form>
                         </div>
                         </div>
@@ -53,9 +58,6 @@
             </div>
         </div>
         <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
+
     </body>
 </html>
