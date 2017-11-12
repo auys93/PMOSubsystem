@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="js/strategy.js"></script>
+  <script src="js/updateStrategy.js"></script>
+
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="assets/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="assets/ionicons.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/dashboard.css" rel="stylesheet">
+
+  <title>PMOSubsystem</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand"><b>PMO</b>Subsystem</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="index.html"><i class="fa fa-users"></i> Users</a></li>
+          <li><a href="reportPage.html"><i class="fa fa-home"></i> Home</a></li>
+          <li><a href="loginpage.html"><i class="fa fa-key"></i> Logout</a></li>
+        </ul>
+        <!--      <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form> -->
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><a href="reportPage.html">Reports</a></li>
+          <li class="active"><a href="#">Strategy<span class="sr-only">(current)</span></a></li>
+          <li><a href="pastReport.html">Past Reports</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 class="sub-header">Strategy</h2>
+          <div class="table-responsive">
+            <table id="App2" ng-app="strategyTable" ng-controller="strategyCtrl" class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Description 1</th>
+                  <th>Description 2</th>
+                  <th>Description 3</th>
+                  <th>Strategy Status</th>
+                  <th>Report ID</th>
+                  <th>Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="x in data" ng-class="{red: x.changeColor, white: !x.changeColor}">
+                  <td>{{x.strategyID}}</td>
+                  <td>{{x.description1}}</td>
+                  <td>{{x.description2}}</td>
+                  <td>{{x.description3}}</td>
+                  <td>{{x.strategyStatus}}</td>
+                  <td>{{x.reportID}}</td>
+                  <td>{{x.username}}</td>
+                  <td> <button type="button" id="button" value="" class="btn btn-default" data-toggle="modal" data-target="#myModal" data-stratno="{{x.strategyID}}" data-descrip1="{{x.description1}}" data-descrip2="{{x.description2}}" data-descrip3="{{x.description3}}"
+                      data-repid="{{x.reportID}}" data-user="{{x.username}}">Authorize</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="App3" ng-app="postStrategy" ng-controller="postCtrl">
+            <form name="strategy-form">
+              <div class="container">
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Authorize</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <center>How do you wish to proceed?</center>
+                          <button type="submit" class="btn btn-success" style="width: 90px; margin: 15px 5px 15px 190px;" ng-click="postApprove(strategyID, description1, description2, description3, strategyApprove, reportID, username)" data-dismiss="modal">Approve</button>
+                          <button type="submit" class="btn btn-danger" style="width: 90px; margin: auto 10;" ng-click="postReject(strategyID, description1, description2, description3, strategyReject, reportID, username)" data-dismiss="modal">Reject</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
