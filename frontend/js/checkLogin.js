@@ -28,7 +28,7 @@ app.controller('loginCtrl', function($scope, $http) {
       if ((item.username == data.username) && (item.password = data.password)) {
         console.log("Success");
         loggedin = "1";
-        window.location.href = 'reportPage.html';
+        window.location.href = 'index.html';
       }
       message = 'Username or password is incorrect';
     });

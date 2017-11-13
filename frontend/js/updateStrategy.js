@@ -35,7 +35,8 @@ app.controller('postCtrl', function($scope, $http) {
       console.log(strategyID);
       console.log(strategyApprove);
       //http://192.168.137.185:4567/strategy/4/status/accept
-      $http.get('http://192.168.137.177:4567/strategy/11/status/Approved', JSON.stringify(data)).then(function(response) {
+      $http.get('http://localhost:4567/strategy/', JSON.stringify(data)).then(function(response) {
+        $scope.data = response.data;
         if (response.data)
           alert("Authorization Successful!");
         var change = document.getElementById("button")[index + 1];
@@ -43,6 +44,16 @@ app.controller('postCtrl', function($scope, $http) {
           change.innerHTML = "Approved";
         }
 
+      });
+
+      angular.forEach($scope.data, function(item) {
+        if(item.strategyID == data.strategyID) {
+          console.log(item.strategyID);
+          $http.get('http://localhost:4567/strategy/'+item.strategyID+'status/Approved', JSON.stringify(data)).then(function(response){
+            if (response.data)
+              console.log("Sent to CMO Successful!");
+          });
+        }
       });
       $http.post('http://localhost:4567/strategy/update', JSON.stringify(data)).then(function(response) {
         if (response.data)
